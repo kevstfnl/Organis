@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/global/style.css">
+    {% block desc %}{% endblock %}
+    {% block title %}{% endblock %}
+    {% block style %}{% endblock %}
+</head>
+
+<body>
+    {% include "../partials/header.html.twig" %}
+    {% block main %}{% endblock %}
+    {% block script %}{% endblock %}
+    {% include "../partials/footer.html.twig" %}
+</body>
+
+</html>

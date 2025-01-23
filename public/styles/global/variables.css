@@ -1,0 +1,17 @@
+
+
+:root {
+    /* background and default text color */
+    --dark-1: hsl(216, 20%, 5%);
+    --dark-2: hsl(214, 15%, 15%);
+    --light-1: hsl(218, 15%, 85%);
+    --light-2: hsl(240, 5%, 95%);
+
+    /* main and second color */
+    --main: hsl(217, 85%, 50%);
+    --second: hsl(40, 85%, 50%);
+
+    /* elements border radius */
+    --box-radius: 16px;
+    --btn-radius: 8px;
+}

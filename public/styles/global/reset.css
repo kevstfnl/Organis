@@ -1,0 +1,28 @@
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+    color: var(--dark-2)
+}
+ul,ol {
+    list-style: none;
+}
+button {
+    background: var(--main);
+    border: none;
+    border-radius: var(--btn-radius);
+    cursor: pointer;
+    color: var(--light-2);
+    min-height: 44px;
+}
+h1,h2,h3,h4 {
+    text-wrap: pretty;
+    color: var(--dark-1);
+}
+p {
+    text-wrap: balanced;
+    color: var(--dark-2)
+}
