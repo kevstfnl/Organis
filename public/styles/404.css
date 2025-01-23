@@ -1,0 +1,20 @@
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100dvh;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: rgba(0, 0, 0, 0.1) solid 2px;
+    border-radius: var(--box-radius);
+    padding: 2em;
+    gap: 1em;
+}
+
+h1 {
+    font-size: 2.5rem;
+}

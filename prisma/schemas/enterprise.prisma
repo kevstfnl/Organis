@@ -1,0 +1,9 @@
+model Enterprise {
+    id        Int       @id @default(autoincrement())
+    name      String
+    siret     Int       @unique
+    events    Event[]
+    employees Employe[]
+    materials Material[]
+    createdAt DateTime  @default(now())
+}

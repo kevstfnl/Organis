@@ -1,0 +1,57 @@
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 100dvh;
+}
+
+.landscape-box {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: var(--box-radius);
+    border: rgba(0, 0, 0, 0.5) solid 2px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 0 8px;
+    backdrop-filter: blur(24px);
+    padding: 2em;
+}
+
+.landscape {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    gap: 3em;
+    padding: 2em;
+    height: 100dvh;
+    width: 100vw;
+
+    background-image: url("../images/webp/enterprise.webp");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    p {
+        color: var(--light-1);
+    }
+}
+
+.landscape-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    width: min(70vw, 800px);
+
+
+    h1 svg {
+        width: min(100%, 400px);
+        height: auto;
+    }
+
+    p {
+        width: 100%;
+        font-size: 1.5rem;
+        color: var(--light-1);
+        padding: 0 !important;
+    }
+}

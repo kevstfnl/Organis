@@ -1,0 +1,10 @@
+footer {
+    background-color: var(--dark-2);
+
+    p {
+        height: 100%;
+        color: var(--light-1);
+        text-align: center;
+        align-content: center;
+    }
+}

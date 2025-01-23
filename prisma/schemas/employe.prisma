@@ -1,0 +1,27 @@
+model Employe {
+    id   Int  @id @default(autoincrement())
+    role Role
+
+    firstName String
+    lastName  String
+    mail      String  @unique
+    password  String
+    age       Int?
+    genre     String?
+    phone     Int?
+
+    entrepriseId Int
+    entreprise   Enterprise @relation(fields: [entrepriseId], references: [id])
+
+    materialId Int
+    material   Material?
+
+    events    Event[]
+    createdAt DateTime @default(now())
+}
+
+enum Role {
+    ADMIN
+    RESPONSABLE
+    EMPLOYEE
+}

@@ -4,7 +4,7 @@ const homeRouter = require("./routers/homeRouter");
 
 const app = express();
 app.use(express.static("./public"));
-app.use(express.urlencoded({ extended : true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: "SuperMotDePasse",
     saveUninitialized: true,
@@ -12,6 +12,11 @@ app.use(session({
 }));
 
 app.use(homeRouter);
+
+
+app.use((req, res) => {
+    res.status(404).render("pages/404.html.twig");
+});
 
 app.listen(3000, (err) => {
     if (err) return console.error(err);

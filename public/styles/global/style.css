@@ -2,8 +2,46 @@
 @import "fonts.css";
 @import "reset.css";
 
+@import "../components/header.css";
+@import "../components/footer.css";
+
 body {
-    line-height: 1.5;
-    background-color: var(--light-1);
     font-family: "Poppins", sans-serif;
+    background-color: var(--light-1);
+    line-height: 1.5;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    min-height: 100dvh;
+
+    display: grid;
+    grid-template-rows: 1fr 50px;
+}
+
+.btn {
+    border-radius: var(--btn-radius);
+    color: var(--light-2);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.5em;
+    transition: filter 250ms;
+
+    &:hover {
+        filter: brightness(1.1);
+    }
+}
+
+.cm {
+    color: var(--main);
+}
+
+.cs {
+    color: var(--second);
+}
+
+.bgm {
+    background-color: var(--main);
+}
+
+.bgs {
+    background-color: var(--second);
 }
