@@ -28,12 +28,12 @@ header {
     transition: scale 250ms;
 
     &:hover {
-        scale: 1.1;
+        scale: 1.05;
     }
 
     &:active {
         transition: scale 100ms;
-        scale: 0.9;
+        scale: 0.95;
     }
 }
 
@@ -56,7 +56,7 @@ header {
 
         &:hover {
             color: var(--light-2);
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
         }
     }
 }

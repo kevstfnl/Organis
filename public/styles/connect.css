@@ -1,1 +1,46 @@
 @import "./components/inputs.css";
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    background-color: var(--light-2);
+    padding: 1em;
+    border-radius: var(--box-radius);
+    width: min(480px, 90vw);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.form-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 16px;
+}
+
+.save-login {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 8px;
+}

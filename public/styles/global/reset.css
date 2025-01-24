@@ -22,6 +22,7 @@ button {
     border-radius: var(--btn-radius);
     cursor: pointer;
     color: var(--light-2);
+    font-weight: 700;
     min-height: 44px;
 }
 

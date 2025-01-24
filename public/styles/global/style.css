@@ -18,11 +18,15 @@ body {
 }
 
 .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: var(--btn-radius);
     color: var(--light-2);
     font-weight: 700;
     font-size: 1rem;
     padding: 0.5em;
+    min-height: 44px;
     transition: filter 250ms;
 
     &:hover {
@@ -44,4 +48,9 @@ body {
 
 .bgs {
     background-color: var(--second);
+}
+
+.error-message {
+    color: rgb(163, 31, 31);
+    text-align: center;
 }

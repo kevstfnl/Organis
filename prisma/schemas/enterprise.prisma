@@ -1,6 +1,7 @@
 model Enterprise {
     id        Int       @id @default(autoincrement())
     name      String
+    reason   String
     siret     Int       @unique
     events    Event[]
     employees Employe[]

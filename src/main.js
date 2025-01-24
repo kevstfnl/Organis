@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const homeRouter = require("./routers/homeRouter");
+const enterpriseRouter = require("./routers/enterpriseRouter");
 
 const app = express();
 app.use(express.static("./public"));
@@ -12,6 +13,7 @@ app.use(session({
 }));
 
 app.use(homeRouter);
+app.use(enterpriseRouter);
 
 
 app.use((req, res) => {

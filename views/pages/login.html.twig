@@ -9,11 +9,30 @@
 {% endblock %}
 
 {% block style %}
-<link rel="stylesheet" href="/styles/home.css">
+<link rel="stylesheet" href="/styles/connect.css">
 {% endblock %}
 
 {% block main %}
 <main>
-   
+    <section>
+        <h1>Connexion:</h1>
+        <form action="/login" method="post">
+            <div class="input-container">
+                <input type="text" name="mail" id="mail" placeholder="">
+                <label for="mail">E-Mail:</label>
+            </div>
+            <div class="input-container">
+                <input type="password" name="password" id="password" placeholder="">
+                <label for="password">Mot de passe:</label>
+            </div>
+            <div class="save-login">
+                <label for="save">Rester connecter</label>
+                <input type="checkbox" name="save" id="save">
+            </div>
+            <div class="form-btns">
+                <button type="submit" class="btn bgm">Se connecter</button>
+            </div>
+        </form>
+    </section>
 </main>
 {% endblock %}

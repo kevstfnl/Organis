@@ -9,11 +9,61 @@
 {% endblock %}
 
 {% block style %}
-<link rel="stylesheet" href="/styles/home.css">
+<link rel="stylesheet" href="/styles/connect.css">
 {% endblock %}
 
 {% block main %}
 <main>
-
+    <section>
+        <h1>Création de compte:</h1>
+        <form action="/register" method="post">
+            <h3>Entreprise:</h3>
+            <div class="input-section">
+                <div class="input-container">
+                    <input type="text" name="name" id="name" placeholder="">
+                    <label for="name">Nom de l'entreprise:</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="reason" id="reason" placeholder="">
+                    <label for="reason">Raison social:</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="siret" id="siret" placeholder="">
+                    <label for="siret">Siret:</label>
+                </div>
+            </div>
+            <h3>Chef d'entreprise:</h3>
+            <div class="input-section">
+                <div class="input-container">
+                    <input type="text" name="lastName" id="lastName" placeholder="">
+                    <label for="lastName">Nom:</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="firstName" id="firstName" placeholder="">
+                    <label for="firstName">Prenom:</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="mail" id="mail" placeholder="">
+                    <label for="mail">E-Mail:</label>
+                </div>
+                <div class="input-container">
+                    <input type="password" name="password" id="password" placeholder="">
+                    <label for="password">Mot de passe:</label>
+                </div>
+                <div class="input-container">
+                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="">
+                    <label for="confirmPassword">Confirmer le mot de passe:</label>
+                </div>
+            </div>
+            {% if error %}
+            <p class="error-message">{{error}}</p>
+            {% endif %}
+            
+            <div class="form-btns">
+                <button type="submit" class="btn bgm">Créer le compte</button>
+                <a href="/login" class="btn bgs">Déjà un compte ?</a>
+            </div>
+        </form>
+    </section>
 </main>
 {% endblock %}

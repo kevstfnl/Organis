@@ -27,13 +27,14 @@
         cursor: text;
         color: rgba(0, 0, 0, 0.75);
         position: absolute;
+        padding-right: 0.5em;
         left: 1rem;
         transition: transform 250ms;
     }
 
     input:not(:placeholder-shown)~label,
     input:focus~label {
-        background-color: white;
+        background-color: var(--light-2);
         transform: translateY(-25px);
     }
 }
