@@ -4,7 +4,7 @@ model Enterprise {
     reason   String
     siret     Int       @unique
     events    Event[]
-    employees Employe[]
+    users User[]
     materials Material[]
     createdAt DateTime  @default(now())
 }

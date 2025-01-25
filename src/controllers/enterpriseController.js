@@ -1,9 +1,9 @@
 const { Request, Response } = require("express");
 
 /**
- * Handle user login.
- * @param {Request} req - La requête HTTP
- * @param {Response} res - La réponse HTTP
+ * Handle enterprise register with administrator account.
+ * @param {Request} req - Request HTTP
+ * @param {Response} res - Response HTTP
  */
 module.exports.register = (req, res) => {
     const { name, reason, siret, lastName, firstName, email, password, confirmPassword } = req.body;
@@ -21,6 +21,7 @@ module.exports.register = (req, res) => {
     }
 
     try {
+        //TODO Register the enterprise in the database if not already exists
         
     } catch (error) {
         return res.status(500).render('pages/register.html.twig', error);

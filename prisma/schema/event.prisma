@@ -8,8 +8,8 @@ model Event {
     entrepriseId Int
     entreprise  Enterprise @relation(fields: [entrepriseId], references: [id])
 
-    employeId Int
-    employe  Employe @relation(fields: [employeId], references: [id])
+    userId Int
+    user  User @relation(fields: [userId], references: [id])
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

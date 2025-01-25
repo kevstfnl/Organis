@@ -6,10 +6,14 @@
                 fill="white" />
         </svg>
     </a>
-    <div class="header-controllers">
-        <a href="/login">Connexion</a>
-        <a href="/register">Créez un compte</a>
-    </div>
+    <nav class="header-controllers">
+        {% if user %}
+            <a href="/logout">Déconnexion</a>
+        {% else %}
+            <a href="/login">Connexion</a>
+            <a href="/register">Créez un compte</a>
+        {% endif %}
+    </nav>
 
 
 </header>
