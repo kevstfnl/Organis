@@ -1,0 +1,34 @@
+{% extends "../layouts/base.html.twig" %}
+
+{% block title %}
+<title>Organis | Connexion</title>
+{% endblock %}
+
+{% block desc %}
+<meta name="description" content="La solution, pour votre entreprise.">
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/styles/connect.css">
+{% endblock %}
+
+{% block main %}
+<main>
+    <section>
+        <h1>Changement de mail:</h1>
+        <form action="/changemail" method="post">
+            <div class="input-container">
+                <input type="text" name="mail" id="mail" placeholder="">
+                <label for="mail">Nouveau Mail:</label>
+            </div>
+            <div class="input-container">
+                <input type="password" name="password" id="password" placeholder="">
+                <label for="password">Mot de passe:</label>
+            </div>
+            <div class="form-btns">
+                <button type="submit" class="btn bgm">Se connecter</button>
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock %}

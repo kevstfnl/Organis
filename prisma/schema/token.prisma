@@ -1,11 +1,17 @@
 model Token {
-    id Int @id @default(autoincrement())
-    token String
-    expiresAt    DateTime
-    createdAt    DateTime  @default(now())
-    updatedAt    DateTime  @updatedAt
+    id        Int       @id @default(autoincrement())
+    type      TokenType
+    token     String    @unique
+    expiresAt DateTime
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
 
-    userId Int @unique
-    user User @relation(fields: [userId], references: [id])
+    userId Int
+    user   User @relation(fields: [userId], references: [id])
+}
 
+enum TokenType {
+    REFRESH_TOKEN
+    EMAIL_VERIFICATION
+    PASSWORD_RESET
 }

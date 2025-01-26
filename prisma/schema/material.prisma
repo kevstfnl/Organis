@@ -1,6 +1,6 @@
 model Material {
     id        Int        @id @default(autoincrement())
-    type Type
+    type MaterialType
     description String
     mac String
 
@@ -13,7 +13,7 @@ model Material {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
-enum Type {
+enum MaterialType {
     PHONE
     COMPUTER
     TABLET

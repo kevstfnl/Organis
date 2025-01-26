@@ -14,8 +14,10 @@
 
 {% block main %}
 <main>
-    <section>
-        
-    </section>
+    {% if user %}
+        <p>{{user.firstName}} {{user.lastName}}</p>
+        <p>{{user.mail}}</p>
+    {% endif %}
+    
 </main>
 {% endblock %}

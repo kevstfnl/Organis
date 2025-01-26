@@ -4,12 +4,14 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const homeRouter = require("./routers/homeRouter");
 const enterpriseRouter = require("./routers/enterpriseRouter");
+const userRouter = require("./routers/userRouter");
 
 require('dotenv').config();
 
 const app = express();
 app.use(express.static("./public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(process.env.COOKIE_KEY));
 app.use(session({
     secret: process.env.SESSION_KEY,
     saveUninitialized: true,
@@ -21,9 +23,11 @@ app.use(session({
         maxAge: 60000
     }
 }));
-app.use(cookieParser(process.env.COOKIE_KEY));
+
+
 app.use(homeRouter);
 app.use(enterpriseRouter);
+app.use(userRouter);
 
 app.use((req, res) => {
     res.status(404).render("pages/404.html.twig");

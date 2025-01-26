@@ -1,6 +1,6 @@
 const { Request, Response } = require("express");
 const jwt = require("jsonwebtoken");
-const { clearSignedCookie } = require("../utils/cookie");
+const { clearSignedCookieAndSession } = require("../utils/cookie");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -32,7 +32,7 @@ module.exports.verify = async (req, res, next) => {
                     const refreshData = jwt.verify(refreshToken, REFRESH_TOKEN_KEY);
                     const userRefresh = await prisma.user.findUnique({
                         where: {
-                            id: refreshData.userId,
+                            id: refreshData.userId
                         },
                         include: {
                             tokens: true,
@@ -47,7 +47,7 @@ module.exports.verify = async (req, res, next) => {
                     throw "Token falsified";
                 } catch (error) {
                     console.error(error);
-                    clearSignedCookie(res, "refreshToken");
+                    clearSignedCookieAndSession(req, res, "refreshToken");
                     res.session.destroy();
                 }
             }

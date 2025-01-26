@@ -2,7 +2,7 @@ model Enterprise {
     id        Int       @id @default(autoincrement())
     name      String
     reason   String
-    siret     Int       @unique
+    siret     BigInt       @unique
     events    Event[]
     users User[]
     materials Material[]

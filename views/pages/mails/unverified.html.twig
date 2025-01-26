@@ -1,0 +1,28 @@
+{% extends "../../layouts/base.html.twig" %}
+
+{% block title %}
+<title>Organis | Profile</title>
+{% endblock %}
+
+{% block desc %}
+<meta name="description" content="La solution, pour votre entreprise.">
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/styles/404.css">
+{% endblock %}
+
+{% block main %}
+<main>
+    <section>
+        <div class="notfound-text">
+            <h1>Email non vérifier</h1>
+            <p>Consultez vos mail et cliquez sur le bouton pour le validé.</p>
+            <p>Si vous n'avez rien reçu, vérifiez dans vos spam ou faite une demande de renvoie</p>
+        </div>
+        <a href="/resendmail/{{ user.id }}" class="btn bgm">Renvoyer le mail</a>
+        <p class="center">ou</p>
+        <a href="/changemail/{{ user.id }}" class="btn bgs">Changer le mail</a>
+    </section>
+</main>
+{% endblock %}
