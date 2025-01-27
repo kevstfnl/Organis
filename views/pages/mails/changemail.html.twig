@@ -1,4 +1,4 @@
-{% extends "../layouts/base.html.twig" %}
+{% extends "../../layouts/base.html.twig"%}
 
 {% block title %}
 <title>Organis | Connexion</title>
@@ -16,7 +16,7 @@
 <main>
     <section>
         <h1>Changement de mail:</h1>
-        <form action="/changemail" method="post">
+        <form action="/change/{{ userId }}" method="post">
             <div class="input-container">
                 <input type="text" name="mail" id="mail" placeholder="">
                 <label for="mail">Nouveau Mail:</label>
@@ -25,8 +25,11 @@
                 <input type="password" name="password" id="password" placeholder="">
                 <label for="password">Mot de passe:</label>
             </div>
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
             <div class="form-btns">
-                <button type="submit" class="btn bgm">Se connecter</button>
+                <button type="submit" class="btn bgm">Changer le mail</button>
             </div>
         </form>
     </section>

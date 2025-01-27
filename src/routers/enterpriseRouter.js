@@ -1,6 +1,11 @@
 const router = require('express').Router();
-const enterpriseController = require('../controllers/enterpriseController');
 
-router.post("/register", enterpriseController.register);
+/**
+ * TODO Enterprise management
+ * - Add / Remove / Edit employe
+ * - Add / Remove / Edit employe's material
+ * - Add / Remove / Edit employe's event-task
+ */
+
 
 module.exports = router;

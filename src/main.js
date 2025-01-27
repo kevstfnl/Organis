@@ -1,5 +1,4 @@
 const express = require("express");
-
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const homeRouter = require("./routers/homeRouter");
@@ -23,7 +22,6 @@ app.use(session({
         maxAge: 60000
     }
 }));
-
 
 app.use(homeRouter);
 app.use(enterpriseRouter);

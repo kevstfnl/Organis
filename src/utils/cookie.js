@@ -1,11 +1,11 @@
 const { Request, Response } = require("express");
 
 /**
- * Créer un cookie signé
- * @param {Response} res - Response HTTP
- * @param {string} name - Le nom du cookie
- * @param {string} value - La valeur à stocker dans le cookie
- * @param {number} maxAge - Durée de vie du cookie en millisecondes (ex : 1 jour = 24 * 60 * 60 * 1000)
+ * Create a signed cookie
+ * @param { Response } res - Response HTTP
+ * @param { string } name - Name of cookie
+ * @param { string } value - Cookie content
+ * @param { number } maxAge - Life time of cookie
  */
 function setSignedCookie(res, name, value, maxAge) {
     res.cookie(name, value, {
@@ -18,10 +18,10 @@ function setSignedCookie(res, name, value, maxAge) {
 }
 
 /**
- * Supprimer un cookie signé
- * @param {Request} req - Request HTTP
- * @param {Response} res - Response HTTP
- * @param {string} name - Le nom du cookie à supprimer
+ * Delete signed cookie and clear current user's session
+ * @param { Request } req - Request HTTP
+ * @param { Response } res - Response HTTP
+ * @param { string } name - Name of cookie to delete
  */
 function clearSignedCookieAndSession(req, res, name) {
     req.session.destroy();

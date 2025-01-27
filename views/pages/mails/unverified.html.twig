@@ -20,9 +20,9 @@
             <p>Consultez vos mail et cliquez sur le bouton pour le validé.</p>
             <p>Si vous n'avez rien reçu, vérifiez dans vos spam ou faite une demande de renvoie</p>
         </div>
-        <a href="/resendmail/{{ user.id }}" class="btn bgm">Renvoyer le mail</a>
+        <a href="/mail/{{ userId }}" class="btn bgm">Renvoyer le mail</a>
         <p class="center">ou</p>
-        <a href="/changemail/{{ user.id }}" class="btn bgs">Changer le mail</a>
+        <a href="/change/{{ userId }}" class="btn bgs">Changer le mail</a>
     </section>
 </main>
 {% endblock %}
