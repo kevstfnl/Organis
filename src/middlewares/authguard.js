@@ -14,50 +14,45 @@ const ACCESS_TOKEN_KEY = process.env.JWT_ACCESS_KEY;
  * @param {Response} res - Response HTTP
  * @param {NextFunction} next - Next stage of the request
  */
-module.exports.verify = async (req, res, next) => {
-    // Check session is active
+module.exports.authguard = async (req, res, next) => {
     if (req.session && req.session.accessToken) {
         try {
-            const accessData = jwt.verify(req.session.accessToken, ACCESS_TOKEN_KEY);
+            const accessToken = jwt.verify(req.session.accessToken, ACCESS_TOKEN_KEY);
             const user = await prisma.user.findUnique({
                 where: {
-                    id: accessData.userId,
-                },
+                    id: accessToken.userId
+                }
             });
-            if (!user) throw "User not found";
+            if (!user) throw "Invalid id in access token";
             req.user = user;
             return next();
         } catch (err) {
-            console.error(err)
+            console.error(err);
         }
     }
 
-    // If session not active check cookie to restaure session
-    const refreshToken = req.signedCookies.refreshToken;
-    if (refreshToken) {
+    if (req.signedCookies && req.signedCookies.refreshToken) {
         try {
-            const refreshData = jwt.verify(refreshToken, REFRESH_TOKEN_KEY);
-            const tokenDb = await prisma.token.findUnique({
+            const refreshToken = jwt.verify(req.signedCookies.refreshToken, REFRESH_TOKEN_KEY);
+            const refreshTokenInDatabase = await prisma.token.findUnique({
                 where: {
-                    token: refreshData,
+                    token: req.signedCookies.refreshToken,
                     type: TokenType.REFRESH_TOKEN
                 },
                 include: {
                     user: true
                 }
             });
-            if (!tokenDb) throw "Token falsified";
-            if (tokenDb.expiresAt  > new Date()) {
-                const accessToken = jwt.sign({userId: tokenDb.userId}, ACCESS_TOKEN_KEY, { expiresIn: "15m" });
-                req.session.accessToken = accessToken;
-                req.user = tokenDb.user;
-            }
-        } catch (error) {
-            console.error(error);
-            clearSignedCookieAndSession(req, res, "refreshToken");
-            res.session.destroy();
+            if (!refreshTokenInDatabase) throw "Invalid refresh token";
+            if (tokenDb.expiresAt > new Date()) throw "Refresh token expired";
+            const newAccessToken = jwt.sign({ userId: tokenDb.userId }, ACCESS_TOKEN_KEY, { expiresIn: "15m" });
+            req.session.accessToken = newAccessToken;
+            req.user = tokenDb.user;
+            return next();
+        } catch (err) {
+            console.error(err);
         }
     }
-    
     res.redirect("/");
+
 };

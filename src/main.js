@@ -17,8 +17,8 @@ app.use(session({
     resave: true,
     cookie: {
         httpOnly: true,
-        secure: true,
-        sameSite: 'None',
+        secure: process.env.NODE_ENV === 'production',
+        secure: false,
         maxAge: 60000
     }
 }));
