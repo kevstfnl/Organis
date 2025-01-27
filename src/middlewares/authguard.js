@@ -33,26 +33,41 @@ module.exports.authguard = async (req, res, next) => {
 
     if (req.signedCookies && req.signedCookies.refreshToken) {
         try {
+
             const refreshToken = jwt.verify(req.signedCookies.refreshToken, REFRESH_TOKEN_KEY);
-            const refreshTokenInDatabase = await prisma.token.findUnique({
+            const refreshTokenInDatabase = await prisma.token.findFirst({
                 where: {
-                    token: req.signedCookies.refreshToken,
+                    token: refreshToken.key,
                     type: TokenType.REFRESH_TOKEN
                 },
                 include: {
                     user: true
                 }
             });
-            if (!refreshTokenInDatabase) throw "Invalid refresh token";
-            if (tokenDb.expiresAt > new Date()) throw "Refresh token expired";
-            const newAccessToken = jwt.sign({ userId: tokenDb.userId }, ACCESS_TOKEN_KEY, { expiresIn: "15m" });
+
+            if (!refreshTokenInDatabase) {
+                throw { message: "Invalid refresh token", user: refreshTokenInDatabase.user }
+            };
+            if (refreshTokenInDatabase.expiresAt < new Date()) {
+                throw { message: "Refresh token expired", user: refreshTokenInDatabase.user }
+            };
+
+            const newAccessToken = jwt.sign({ userId: refreshTokenInDatabase.userId }, ACCESS_TOKEN_KEY, { expiresIn: "15m" });
             req.session.accessToken = newAccessToken;
-            req.user = tokenDb.user;
+            req.user = refreshTokenInDatabase.user;
             return next();
         } catch (err) {
-            console.error(err);
+            console.error(err.message);
+            await prisma.token.deleteMany({
+                where: {
+                    userId: err.user.id
+                }
+            })
+            clearSignedCookieAndSession(req, res, "refreshToken");
         }
     }
     res.redirect("/");
+
+
 
 };

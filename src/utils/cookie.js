@@ -9,7 +9,7 @@ const { Request, Response } = require("express");
  */
 function setSignedCookie(res, name, value, maxAge) {
     res.cookie(name, value, {
-        signed: true, 
+        signed: true,
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'Strict',
@@ -28,9 +28,8 @@ function clearSignedCookieAndSession(req, res, name) {
     res.clearCookie(name, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'Strict',
+        sameSite: 'strict',
     });
-    res.redirect("/");
 }
 
 module.exports = { setSignedCookie, clearSignedCookieAndSession };
