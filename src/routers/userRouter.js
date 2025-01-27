@@ -18,7 +18,7 @@ router.get("/mail/:id", uncryptIds, sendValidationMail);
 
 router.get("/dashboard", verify, (req, res) => req.user.verified ? 
       res.render("pages/dashboard.html.twig", { user: req.user }) :
-      res.render("pages/unverified.html.twig", { user: req.user.id })
+      res.render("pages/unverified.html.twig", { userId: wt.sign({id: req.user.id}, process.env.JWT_SHARING_ID, { expiresIn: "15m" })})
 );
 
 module.exports = router;
