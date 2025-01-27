@@ -50,6 +50,10 @@ body {
     background-color: var(--second);
 }
 
+.bgr {
+    background-color: rgb(163, 31, 31);
+}
+
 .error-message {
     color: rgb(163, 31, 31);
     text-align: center;

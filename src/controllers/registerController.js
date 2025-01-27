@@ -66,14 +66,17 @@ async function register(req, res) {
 async function sendValidationMail(req, res) {
     const id = req.params.id;
     if (!id) res.status(400).res.redirect("/");
+
     try {
         const user = await prisma.user.findUnique({
             where: {
                 id: parseInt(id)
             }
         });
+        
         if (!user) throw "Utilisateur non trouvé";
-        await handleMailValidationSending(user);
+        if (!req.query.nosend) await handleMailValidationSending(user);
+    
         const cryptedId = jwt.sign({id: user.id}, process.env.JWT_SHARING_ID, { expiresIn: "15m" });
         res.render("pages/mails/unverified.html.twig", { userId: cryptedId });
     } catch (err) {
