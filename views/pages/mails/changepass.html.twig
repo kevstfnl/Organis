@@ -15,11 +15,11 @@
 {% block main %}
 <main>
     <section>
-        <h1>Changement de mail:</h1>
+        <h1>Changement de mot de passe:</h1>
         <form action="/changepassword" method="post">
             <div class="input-container">
-                <input type="oldPassword" name="oldPassword" id="oldPassword" placeholder="">
-                <label for="oldPassword">Ancien mot de pass:</label>
+                <input type="password" name="oldPassword" id="oldPassword" placeholder="">
+                <label for="oldPassword">Ancien mot de passe:</label>
             </div>
             <div class="input-container">
                 <input type="password" name="password" id="password" placeholder="">

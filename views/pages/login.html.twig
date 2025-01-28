@@ -18,19 +18,19 @@
         <h1>Connexion:</h1>
         <form action="/login" method="post">
             <div class="input-container">
-                <input type="text" name="mail" id="mail" placeholder="">
-                <label for="mail">E-Mail:</label>
+                <input type="email" name="mail" id="mail" placeholder="">
+                <label for="mail">E-mail:</label>
             </div>
             <div class="input-container">
                 <input type="password" name="password" id="password" placeholder="">
                 <label for="password">Mot de passe:</label>
             </div>
             <div class="save-login">
-                <label for="save">Rester connecter</label>
+                <label for="save">Rester connecté</label>
                 <input type="checkbox" name="save" id="save">
             </div>
             {% if error %}
-            <p class="error-message">{{error}}</p>
+            <p class="error-message">{{ error }}</p>
             {% endif %}
             <div class="form-btns">
                 <a href="/forgotpassword">Mot de passe oublié</a>

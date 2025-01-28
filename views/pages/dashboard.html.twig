@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block style %}
+<link rel="stylesheet" href="/styles/dashboard.css">
 {% endblock %}
 
 {% block main %}
@@ -26,10 +27,13 @@
             SINON:
                 VISION MATERIELS,
                 VISION CALLENDRIER
-        
         -->
-        <p>{{user.firstName}} {{user.lastName}}</p>
-        <p>{{user.mail}}</p>
+        <section>
+            <h2>Membres:</h2>
+        </section>
+        <section>
+            <h2>Callendrier:</h2>
+        </section>
     {% endif %}
     
 </main>
