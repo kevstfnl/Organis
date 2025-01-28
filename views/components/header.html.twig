@@ -8,10 +8,12 @@
     </a>
     <nav class="header-controllers">
         {% if user %}
-            <a href="/logout">Déconnexion</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Déconnexion</a>
         {% else %}
-            <a href="/login">Connexion</a>
-            <a href="/register">Créez un compte</a>
+        <a href="/login">Connexion</a>
+        <a href="/register">Créez un compte</a>
         {% endif %}
     </nav>
 

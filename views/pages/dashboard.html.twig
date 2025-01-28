@@ -14,6 +14,20 @@
 {% block main %}
 <main>
     {% if user %}
+        <!--
+            SI ADMIN:
+                PARAMETRES ENTREPRISE,
+                GESTION UTILISATEUR,
+                GESTION MATERIELS D'UTILISATEUR,
+                GESTION EVENT (CALLENDRIER)
+        -->
+
+        <!--
+            SINON:
+                VISION MATERIELS,
+                VISION CALLENDRIER
+        
+        -->
         <p>{{user.firstName}} {{user.lastName}}</p>
         <p>{{user.mail}}</p>
     {% endif %}

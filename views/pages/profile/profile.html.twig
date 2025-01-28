@@ -1,0 +1,57 @@
+{% extends "../../layouts/base.html.twig" %}
+
+{% block title %}
+<title>Organis | Profile</title>
+{% endblock %}
+
+{% block desc %}
+<meta name="description" content="La solution, pour votre entreprise.">
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/styles/profile.css">
+{% endblock %}
+
+{% block main %}
+<main>
+    <section class="profile">
+        <h1>Paramètre du profile</h1>
+        <form action="/profile" method="post">
+            <div class="input-container">
+                <input type="text" name="mail" id="mail" placeholder="" value="{{ user.mail }}">
+                <label for="mail">E-Mail:</label>
+            </div>
+            <div class="input-container">
+                <input type="text" name="lastName" id="lastName" placeholder="" value="{{ user.lastName }}">
+                <label for="lastName">Nom</label>
+            </div>
+            <div class="input-container">
+                <input type="text" name="firstName" id="firstName" placeholder="" value="{{ user.firstName }}">
+                <label for="firstName">Prénom:</label>
+            </div>
+            <div class="input-container">
+                <input type="text" name="age" id="age" placeholder="" value="{{ user.age }}">
+                <label for="age">Age:</label>
+            </div>
+            <div class="input-container">
+                <input type="text" name="genre" id="genre" placeholder="" value="{{ user.genre }}">
+                <label for="genre">Genre:</label>
+            </div>
+            <div class="input-container">
+                <input type="text" name="phone" id="phone" placeholder="" value="{{ user.phone }}">
+                <label for="phone">Telephone:</label>
+            </div>
+            
+            {% if error %}
+            <p class="error-message">{{error}}</p>
+            {% endif %}
+            
+            <div class="btns">
+                <a href="/changepassword" class="btn bgr">Changer le mot de passe</a>
+                <button type="submit" class="btn bgm">Modifier</button>
+            </div>
+        </form>
+    </section>
+
+</main>
+{% endblock %}

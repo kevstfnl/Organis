@@ -1,0 +1,41 @@
+{% extends "../../layouts/base.html.twig"%}
+
+{% block title %}
+<title>Organis | Connexion</title>
+{% endblock %}
+
+{% block desc %}
+<meta name="description" content="La solution, pour votre entreprise.">
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/styles/connect.css">
+{% endblock %}
+
+{% block main %}
+<main>
+    <section>
+        <h1>Changement de mail:</h1>
+        <form action="/changepassword" method="post">
+            <div class="input-container">
+                <input type="oldPassword" name="oldPassword" id="oldPassword" placeholder="">
+                <label for="oldPassword">Ancien mot de pass:</label>
+            </div>
+            <div class="input-container">
+                <input type="password" name="password" id="password" placeholder="">
+                <label for="password">Nouveau mot de passe:</label>
+            </div>
+            <div class="input-container">
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="">
+                <label for="confirmPassword">Confirmer le mot de passe:</label>
+            </div>
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
+            <div class="form-btns">
+                <button type="submit" class="btn bgm">Changer le mot de passe</button>
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock %}

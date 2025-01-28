@@ -9,7 +9,19 @@ module.exports = Prisma.defineExtension({
                 const hash = await bcrypt.hash(args.data.password, 10);
                 args.data.password = hash;
                 return query(args);
-            }
+            },
+            update: async ({ args, query }) => {
+                if (!args.data.password) return query(args);
+                const hash = await bcrypt.hash(args.data.password, 10);
+                args.data.password = hash;
+                return query(args);
+            },
         }
     }
-})
+});
+
+async function hash({ args, query }) {
+    const hash = await bcrypt.hash(args.data.password, 10);
+    args.data.password = hash;
+    return query(args);
+}

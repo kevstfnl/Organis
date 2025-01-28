@@ -1,0 +1,19 @@
+{% extends "../layouts/mail.html.twig" %}
+
+{% block title %}
+<h1>Changement de mot de passe</h1>
+{% endblock %}
+
+{% block content %}
+<p>Nous avons bien reçu votre demande de changement de mot de passe, pour la finaliser et confirmer ce changement,
+    veuillez cliquer sur le liens ci-dessous:</p>
+{% endblock %}
+
+{% block usage %}
+<a href="{{ url }}" class="btn">Changez de mot de passe</a>
+{% endblock %}
+
+{% block warning %}
+<p class="second-text">Si vous n'etes pas a l'origine de cette demande, vous pouvez ignorer ce
+    message.</p>
+{% endblock %}

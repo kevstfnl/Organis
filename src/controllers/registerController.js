@@ -49,7 +49,7 @@ async function register(req, res) {
                 }
             }
         });
-        handleMailValidationSending(user);
+        sendValidateMail(user);
         const cryptedId = jwt.sign({id: user.id}, process.env.JWT_SHARING_ID, { expiresIn: "15m" });
         res.render("pages/mails/unverified.html.twig", { userId: cryptedId });
     } catch (error) {
@@ -75,7 +75,7 @@ async function sendValidationMail(req, res) {
         });
         
         if (!user) throw "Utilisateur non trouvé";
-        if (!req.query.nosend) await handleMailValidationSending(user);
+        if (!req.query.nosend) await sendValidateMail(user);
     
         const cryptedId = jwt.sign({id: user.id}, process.env.JWT_SHARING_ID, { expiresIn: "15m" });
         res.render("pages/mails/unverified.html.twig", { userId: cryptedId });
@@ -153,7 +153,7 @@ async function handleChangeValidationMail(req, res) {
             }
         });
         
-        await handleMailValidationSending(user);
+        await sendValidateMail(user);
         
         res.render("pages/mails/unverified.html.twig", { userId: cryptedId });
 
@@ -206,7 +206,7 @@ async function validateMail(req, res) {
 /**
  * Function to generate token and send this by mail
  */
-async function handleMailValidationSending(user) {
+async function sendValidateMail(user) {
     const random = crypto.randomBytes(32).toString("hex");
     await prisma.token.create({
         data: {
@@ -220,4 +220,4 @@ async function handleMailValidationSending(user) {
     sendMailValidation(user, token);
 }
 
-module.exports = { register, sendValidationMail, requestChangeValidationMail, handleChangeValidationMail, validateMail }
+module.exports = { sendMail: sendValidateMail, register, sendValidationMail, requestChangeValidationMail, handleChangeValidationMail, validateMail }

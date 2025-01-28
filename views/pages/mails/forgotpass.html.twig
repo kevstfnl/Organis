@@ -1,0 +1,33 @@
+{% extends "../../layouts/base.html.twig"%}
+
+{% block title %}
+<title>Organis | Connexion</title>
+{% endblock %}
+
+{% block desc %}
+<meta name="description" content="La solution, pour votre entreprise.">
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/styles/connect.css">
+{% endblock %}
+
+{% block main %}
+<main>
+    <section>
+        <h1>Mot de passe oublié:</h1>
+        <form action="/forgotpassword" method="post">
+            <div class="input-container">
+                <input type="mail" name="mail" id="mail" placeholder="">
+                <label for="mail">E-Mail:</label>
+            </div>
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
+            <div class="form-btns">
+                <button type="submit" class="btn bgm">Changer le mot de passe</button>
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock %}
