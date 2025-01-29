@@ -3,22 +3,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding-inline: 1em;
-
-    height: 50px;
-    width: 90vw;
-
-
-    background-color: rgba(0, 0, 0, 0.25);
-    border-radius: var(--box-radius);
-    border: rgba(0, 0, 0, 0.25) solid 2px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0 0 8px;
-    backdrop-filter: blur(24px);
-
-    position: fixed;
-    z-index: 1000;
-    top: 1em;
-    left: 50%;
-    translate: -50%;
+    background-color: var(--dark-2);
 }
 
 .logo {

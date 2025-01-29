@@ -135,7 +135,7 @@ async function handleChangeValidationMail(req, res) {
         if (!user || !await bcrypt.compare(password, user.password)) {
             return res.status(400).render('pages/mails/changemail.html.twig', {
                 userId: cryptedId,
-                error: "Le mot de passe n'est pas valide"
+                error: "Le mot de passe n'est pas valide !"
             });
         }
         await prisma.token.deleteMany({

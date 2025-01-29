@@ -1,0 +1,46 @@
+{% extends "../../layouts/base.html.twig" %}
+
+{% block title %}
+<title>Organis | Dashboard</title>
+{% endblock %}
+
+{% block desc %}
+<meta name="description" content="La solution, pour votre entreprise.">
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/styles/connect.css">
+{% endblock %}
+
+{% block main %}
+<main>
+    <section>
+        <h1>Modification de membre:</h1>
+        <form action="/edit/{{ user.id }}" method="post">
+            <div class="input-container">
+                <input type="email" name="mail" id="mail" placeholder="" value="{{edit.mail}}">
+                <label for="mail">E-mail:</label>
+            </div>
+            <div class="input-container">
+                <input type="text" name="lastName" id="lastName" placeholder="" value="{{edit.lastName}}">
+                <label for="lastName">Nom:</label>
+            </div>
+            <div class="input-container">
+                <input type="text" name="firstName" id="firstName" placeholder="" value="{{edit.firstName}}">
+                <label for="firstName">Prenom:</label>
+            </div>
+
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
+
+            <div class="form-btns">
+                <a href="/" class="btn bgs">Retour</a>
+                <a href="/remove/{{ user.id }}" class="btn bgr">Virer</a>
+                <button type="submit" class="btn bgm">Modifier</button>
+
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock %}

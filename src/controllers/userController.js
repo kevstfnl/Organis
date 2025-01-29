@@ -1,5 +1,5 @@
 const { Request, Response } = require("express");
-const { TokenType, PrismaClient } = require("@prisma/client");
+const { TokenType, PrismaClient, Role } = require("@prisma/client");
 const { setSignedCookie } = require("../utils/cookie");
 
 const hashPassword = require("../middlewares/hashPassword");
@@ -7,7 +7,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const { sendMailChangePassword } = require("../utils/mail");
-
 const prisma = new PrismaClient().$extends(hashPassword);
 
 /**
@@ -32,7 +31,7 @@ async function login(req, res) {
         });
 
         if (!user) throw "Email incorrecte";
-        if (!await bcrypt.compare(password, user.password)) throw "Mot de passe incorrecte";
+        if (!await bcrypt.compare(password, user.password)) throw "Le mot de passe n'est pas valide !"
 
         req.session.accessToken = jwt.sign({ userId: user.id }, process.env.JWT_ACCESS_KEY, { expiresIn: "15m" });
         await prisma.token.deleteMany({
@@ -85,7 +84,13 @@ async function update(req, res) {
             id: lastUser.id
         },
         data: {
-            mail, verified, lastName, firstName, age, genre, phone
+            mail,
+            verified,
+            lastName,
+            firstName,
+            ...(age && age !== '' && { age }),
+            ...(genre && genre !== '' && { genre }),
+            ...(phone && phone !== '' && { phone })
         }
     });
     if (!user.verified) {
@@ -187,7 +192,7 @@ async function sendUpdatePasswordRequest(req, res) {
         return res.render("pages/mails/changepass.html.twig", { error: 'Les mots de passe ne correspondent pas !' });
     }
     if (!await bcrypt.compare(oldPassword, req.user.password)) {
-        return res.render("pages/mails/changepass.html.twig", { error: 'Ancien mot de passe incorrecte' });
+        return res.render("pages/mails/changepass.html.twig", { error: 'Ancien mot de passe incorrecte !' });
     }
     try {
         await prisma.user.update({
@@ -204,6 +209,7 @@ async function sendUpdatePasswordRequest(req, res) {
         res.render("pages/mails/changepass.html.twig", { error: err });
     }
 }
+
 /**
  * Function to generate token and send this by mail
  */
@@ -221,4 +227,35 @@ async function sendPassMail(user) {
     sendMailChangePassword(user, token);
 }
 
-module.exports = { login, update, sendForgotPasswordRequest, updateForgotPassword, sendUpdatePasswordRequest };
+/**
+ * Update user password.
+ * @param {Request} req - Request HTTP
+ * @param {Response} res - Response HTTP
+ */
+async function displayDashboard(req, res) {
+    const user = req.user;
+    try {
+        const enterprise = await prisma.enterprise.findUnique({
+            where: {
+                id: user.enterpriseId
+            },
+            include: {
+                users: true,
+                materials: true
+            }
+        });
+
+        enterprise.users.forEach((user) => {
+            user.id = jwt.sign({ id: user.id }, process.env.JWT_SHARING_ID, { expiresIn: "15m" });
+        });
+
+        if (!enterprise) throw "Entreprise non trouvé";
+
+        res.render("pages/dashboard.html.twig", { user: req.user, users: enterprise.users, materials: enterprise.materials });
+    } catch (err) {
+        console.log(err);
+        res.redirect("/");
+    }
+}
+
+module.exports = { login, update, sendForgotPasswordRequest, updateForgotPassword, sendUpdatePasswordRequest, displayDashboard };

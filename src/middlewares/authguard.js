@@ -21,7 +21,7 @@ module.exports.authguard = async (req, res, next) => {
             const user = await prisma.user.findUnique({
                 where: {
                     id: accessToken.userId
-                }
+                },
             });
             if (!user) throw "Invalid id in access token";
             req.user = user;

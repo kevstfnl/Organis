@@ -1,0 +1,18 @@
+{% extends "../layouts/mail.html.twig" %}
+
+{% block title %}
+<h1>Bienvenue</h1>
+{% endblock %}
+
+{% block content %}
+<p>L'entreprise {{ entreprise }} vous a ajouté a son panel, pour y acceder, cliquez sur le liens ci-dessous, connectez vous avec votre address E-Mail et ce mot de passe: {{ password }}</p>
+{% endblock %}
+
+{% block usage %}
+<a href="127.0.0.1/login" class="btn">Page de connexion</a>
+{% endblock %}
+
+{% block warning %}
+<p class="second-text">Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer ce
+    message.</p>
+{% endblock %}

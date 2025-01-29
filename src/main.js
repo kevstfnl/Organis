@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const homeRouter = require("./routers/homeRouter");
 const enterpriseRouter = require("./routers/enterpriseRouter");
 const userRouter = require("./routers/userRouter");
+const materialRouter = require("./routers/materialRouter");
 
 require('dotenv').config();
 
@@ -26,6 +27,7 @@ app.use(session({
 app.use(homeRouter);
 app.use(enterpriseRouter);
 app.use(userRouter);
+app.use(materialRouter);
 
 app.use((req, res) => {
     res.status(404).render("pages/404.html.twig");

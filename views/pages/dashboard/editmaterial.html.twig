@@ -1,0 +1,40 @@
+{% extends "../../layouts/base.html.twig" %}
+
+{% block title %}
+<title>Organis | Dashboard</title>
+{% endblock %}
+
+{% block desc %}
+<meta name="description" content="La solution, pour votre entreprise.">
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/styles/connect.css">
+{% endblock %}
+
+{% block main %}
+<main>
+    <section>
+        <h1>Modifier materiel:</h1>
+        <form action="/edit/material/{{ material.id }}" method="post">
+            <div class="input-container">
+                <input type="text" name="mac" id="mac" placeholder="" value="{{ material.mac }}">
+                <label for="mac">MAC:</label>
+            </div>
+            <div class="input-container">
+                <input type="text" name="description" id="description" placeholder="" value="{{ material.description }}">
+                <label for="description">Description:</label>
+            </div>
+
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
+            
+            <div class="form-btns">
+                <a href="/" class="btn bgs">Retour</a>
+                <button type="submit" class="btn bgm">Modifier</button>
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock %}

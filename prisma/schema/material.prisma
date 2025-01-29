@@ -4,8 +4,8 @@ model Material {
     description String
     mac String
 
-    userId Int @unique
-    user User @relation(fields: [userId], references: [id])
+    userId Int? @unique
+    user User? @relation(fields: [userId], references: [id])
 
     enterpriseId Int
     enterprise  Enterprise @relation(fields: [enterpriseId], references: [id])

@@ -15,6 +15,7 @@ const transporter = mailer.createTransport({
 
 const validationTemplatePath = 'views/mail/confirmation.html.twig';
 const changePasswordTemplatePath = 'views/mail/changepass.html.twig';
+const newMemberTemplatePath = 'views/mail/newuser.html.twig';
 
 module.exports.sendMailValidation = (user, token) => {
     twig.renderFile(validationTemplatePath, {
@@ -49,6 +50,30 @@ module.exports.sendMailChangePassword = (user, token) => {
             to: user.mail,
             subject: 'Changement mot de passe Organis',
             text: 'Veuillez confirmer le changement de mot de passe du compte Organis.',
+            html: juice(res)
+        };
+        transporter.sendMail(mailOptions, (err, info) => {
+            if (err) return console.error('Erreur:', err);
+            console.log('Email envoyé: ', info.response);
+        });
+    });
+}
+
+module.exports.sendMailToNewUser = (user, entreprise, password) => {
+    twig.renderFile(newMemberTemplatePath, {
+        name: user.lastName + " " + user.firstName,
+        url: `http://localhost:3000/login`,
+        entreprise: entreprise,
+        password: password
+
+    }, (err, res) => {
+        if (err) return console.error(err);
+
+        const mailOptions = {
+            from: '"Organis" <noreply@organis.org>',
+            to: user.mail,
+            subject: 'Access a votre panel',
+            text: 'Voici votre access au dashboard de votre entreprise.',
             html: juice(res)
         };
         transporter.sendMail(mailOptions, (err, info) => {
