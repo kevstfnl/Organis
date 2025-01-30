@@ -10,7 +10,10 @@
 
 {% block style %}
 <link rel="stylesheet" href="/styles/dashboard.css">
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 {% endblock %}
+
+
 
 {% block main %}
 <main>
@@ -26,7 +29,7 @@
             <li>
                 <p>{{ member.lastName }} {{member.firstName}} </p>
                 <div class="user-btns">
-                    <a href="#{{ member.id }}" class="btn bgm">Taches</a>
+                    <a href="/add/event/{{ member.id }}" class="btn bgm">Taches</a>
                     <a href="/edit/member/{{ member.id }}" class="btn bgs">Modifier</a>
                 </div>
             </li>
@@ -83,7 +86,16 @@
         <h2>Planning:</h2>
         <div id="calendar"></div>
     </section>
-
     {% endif %}
+
+    <script>
+        const calendarDiv = document.getElementById('calendar');
+        calendar = new FullCalendar.Calendar(calendarDiv, {
+            locale: 'fr',
+            initialView: 'dayGridMonth',
+            events: '/events'
+        });
+        calendar.render();
+    </script>
 </main>
 {% endblock %}

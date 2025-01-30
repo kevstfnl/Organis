@@ -58,11 +58,6 @@ module.exports.authguard = async (req, res, next) => {
             return next();
         } catch (err) {
             console.error(err.message);
-            await prisma.token.deleteMany({
-                where: {
-                    userId: err.user.id
-                }
-            })
             clearSignedCookieAndSession(req, res, "refreshToken");
         }
     }

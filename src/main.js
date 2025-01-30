@@ -5,6 +5,7 @@ const homeRouter = require("./routers/homeRouter");
 const enterpriseRouter = require("./routers/enterpriseRouter");
 const userRouter = require("./routers/userRouter");
 const materialRouter = require("./routers/materialRouter");
+const eventRouter = require("./routers/eventRouter");
 
 require('dotenv').config();
 
@@ -28,6 +29,8 @@ app.use(homeRouter);
 app.use(enterpriseRouter);
 app.use(userRouter);
 app.use(materialRouter);
+app.use(eventRouter);
+
 
 app.use((req, res) => {
     res.status(404).render("pages/404.html.twig");

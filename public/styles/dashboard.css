@@ -1,7 +1,7 @@
 main {
     display: grid;
     grid-template-columns: 420px 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto 1fr;
     gap: 0.5em;
     padding: 0.5em;
 }
@@ -26,6 +26,7 @@ section {
 .add-material {
     display: flex;
     gap: 8px;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 1em;
 }
@@ -85,11 +86,18 @@ section {
     }
 }
 
+#calendar {
+    background-color: white;
+    margin: 1em;
+    padding: 1em;
+    border-radius: var(--box-radius);
+}
+
 @media (max-width: 860px) {
     main {
         display: grid;
         grid-template-columns: auto;
-        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto;
         gap: 0.5em;
         padding: 0.5em;
     }
