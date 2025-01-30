@@ -49,7 +49,20 @@
                 <p>{{ material.description }} ({{material.mac}})</p>
                 <form action="/assign/{{material.id}}" method="post" class="assign">
                     <select name="materialUser" id="materialUser">
+
                         <option value="none">Personne</option>
+                        {% if users %}
+                        {% for member in users %}
+
+                        {% if material.userId == member.id %}
+                        <option value="{{member.id}}" selected>{{ member.lastName }} {{ member.firstName }}</option>
+                        {% else %}
+                        <option value="{{member.id}}">{{ member.lastName }} {{ member.firstName }}</option>
+                        {% endif %}
+
+                        {% endfor %}
+                        {% endif %}
+
                     </select>
                     <button type="submit" class="btn bgm">Réassigner</button>
                 </form>
@@ -68,9 +81,9 @@
 
     <section>
         <h2>Planning:</h2>
+        <div id="calendar"></div>
     </section>
 
     {% endif %}
-
 </main>
 {% endblock %}

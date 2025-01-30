@@ -1,4 +1,4 @@
-const { addMember, displayEditMember } = require('../controllers/enterpriseController');
+const { addMember, displayEditMember, editMember } = require('../controllers/enterpriseController');
 const { authguard } = require('../middlewares/authguard');
 const { uncryptIds } = require('../middlewares/idSharing');
 
@@ -15,7 +15,8 @@ const router = require('express').Router();
 router.get("/add/user", authguard, (req, res) => res.render("pages/dashboard/addmember.html.twig", { user: req.user }));
 router.post("/add/user", authguard, addMember);
 
-router.get("/edit/member/:id", authguard, uncryptIds, displayEditMember);
+router.get("/edit/member/:id", authguard, displayEditMember);
+router.post("/edit/member/:id", authguard, editMember);
 //router.get("/remove/:id",authguard, uncryptIds , )
 
 module.exports = router;

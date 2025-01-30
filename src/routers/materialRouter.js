@@ -1,4 +1,4 @@
-const { addmaterial, editmaterial, displayEditmaterial, deleteMaterial } = require("../controllers/materialController");
+const { addmaterial, editmaterial, displayEditmaterial, deleteMaterial, assignMaterial } = require("../controllers/materialController");
 const { authguard } = require("../middlewares/authguard");
 
 const router = require("express").Router();
@@ -10,5 +10,8 @@ router.get("/edit/material/:id", authguard, displayEditmaterial);
 router.post("/edit/material/:id", authguard, editmaterial);
 
 router.get("/delete/material/:id", authguard, deleteMaterial);
+
+
+router.post("/assign/:id", authguard, assignMaterial)
 
 module.exports = router;

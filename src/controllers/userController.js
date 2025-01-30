@@ -245,10 +245,6 @@ async function displayDashboard(req, res) {
             }
         });
 
-        enterprise.users.forEach((user) => {
-            user.id = jwt.sign({ id: user.id }, process.env.JWT_SHARING_ID, { expiresIn: "15m" });
-        });
-
         if (!enterprise) throw "Entreprise non trouvé";
 
         res.render("pages/dashboard.html.twig", { user: req.user, users: enterprise.users, materials: enterprise.materials });

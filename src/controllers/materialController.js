@@ -1,5 +1,6 @@
 const { Request, Response } = require("express");
 const { PrismaClient, MaterialType, Role } = require("@prisma/client");
+const jwt = require("jsonwebtoken");
 const prisma = new PrismaClient();
 
 /**
@@ -111,4 +112,38 @@ async function deleteMaterial(req, res) {
     res.redirect("/");
 }
 
-module.exports = { addmaterial, displayEditmaterial, editmaterial, deleteMaterial }
+
+/**
+ * Assign material
+ * @param {Request} req - Request HTTP
+ * @param {Response} res - Response HTTP
+ **/
+async function assignMaterial(req, res) {
+    const user = req.user;
+    if (user.role != Role.ADMIN) return res.redirect("/");
+
+    const materialId = req.params.id;
+    const { materialUser } = req.body;
+
+    try {
+        await prisma.material.update({
+            where: {
+                id: parseInt(materialId)
+            },
+            data: {
+                user: {
+                    connect: {
+                        id: parseInt(materialUser)
+                    }
+                }
+            }
+
+        });
+
+    } catch (err) {
+        console.error(err);
+    }
+    res.redirect("/");
+}
+
+module.exports = { addmaterial, displayEditmaterial, editmaterial, deleteMaterial, assignMaterial }
