@@ -36,7 +36,9 @@
 
             <div class="form-btns">
                 <a href="/" class="btn bgs">Retour</a>
-                <a href="/remove/{{ user.id }}" class="btn bgr">Virer</a>
+                {% if canSuppress %}
+                <a href="/remove/member/{{ edit.id }}" class="btn bgr">Virer</a>
+                {% endif %}
                 <button type="submit" class="btn bgm">Modifier</button>
 
             </div>

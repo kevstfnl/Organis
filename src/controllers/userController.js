@@ -234,24 +234,30 @@ async function sendPassMail(user) {
  */
 async function displayDashboard(req, res) {
     const user = req.user;
-    try {
-        const enterprise = await prisma.enterprise.findUnique({
-            where: {
-                id: user.enterpriseId
-            },
-            include: {
-                users: true,
-                materials: true
-            }
-        });
 
-        if (!enterprise) throw "Entreprise non trouvé";
+    if (user.role === Role.ADMIN) {
+        try {
+            const enterprise = await prisma.enterprise.findUnique({
+                where: {
+                    id: user.enterpriseId
+                },
+                include: {
+                    users: true,
+                    materials: true
+                }
+            });
 
-        res.render("pages/dashboard.html.twig", { user: req.user, users: enterprise.users, materials: enterprise.materials });
-    } catch (err) {
-        console.log(err);
-        res.redirect("/");
+            if (!enterprise) throw "Entreprise non trouvé";
+
+            res.render("pages/dashboard.html.twig", { user: req.user, users: enterprise.users, materials: enterprise.materials });
+        } catch (err) {
+            console.log(err);
+            res.redirect("/");
+        }
+    } else {
+        return res.render("pages/user.html.twig", { user: req.user });
     }
+
 }
 
 module.exports = { login, update, sendForgotPasswordRequest, updateForgotPassword, sendUpdatePasswordRequest, displayDashboard };

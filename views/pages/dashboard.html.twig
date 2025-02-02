@@ -86,16 +86,118 @@
         <h2>Planning:</h2>
         <div id="calendar"></div>
     </section>
-    {% endif %}
 
+    <section id="mod" class="mod">
+        <article>
+            <h3>Modification de l'événement:</h3>
+            <form action="/edit/event/" method="post" id="eventEdit">
+                <div class="input-container">
+                    <input type="text" name="title" id="title" placeholder="" value="{{edit.firstName}}">
+                    <label for="title">Titre:</label>
+                </div>
+                <div class="task-date">
+                    <h2>Début:</h2>
+                    <div class="input-container">
+                        <input type="date" name="start" id="start" placeholder="">
+                        <label for="start">Date:</label>
+                    </div>
+                    <div class="input-container">
+                        <input type="time" name="startTime" id="startTime" placeholder="">
+                        <label for="startTime">Heure:</label>
+                    </div>
+                </div>
+
+                <select name="userId" id="user">
+                    {% if users %}
+                    {% for member in users %}
+                    <option value="{{member.id}}" data-userId="{{member.id}}">{{ member.lastName }} {{ member.firstName
+                        }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+
+                <div class="ended">
+                    <label for="finish">Tache accomplie:</label>
+                    <input type="checkbox" name="finish" id="finish">
+                </div>
+
+                <div class="btns">
+                    <button type="button" class="btn bgs" id="back">Retours</button>
+                    <button type="submit" class="btn bgm">Modifier</button>
+                    <a href="/" class="btn bgr" id="delete">Supprimer</a>
+                </div>
+            </form>
+        </article>
+    </section>
+
+
+
+
+    {% endif %}
     <script>
+        const mod = document.getElementById("mod");
+        const modForm = document.getElementById("eventEdit");
+        const back = document.getElementById("back");
+        const deleteBtn = document.getElementById("delete");
+        back.addEventListener("click", toggleModale);
+
+        const titleInput = document.getElementById("title");
+        const startInput = document.getElementById("start");
+        const startTimeInput = document.getElementById("startTime");
+        const finishInput = document.getElementById("finish");
+        const userInput = document.getElementById("user");
+
         const calendarDiv = document.getElementById('calendar');
         calendar = new FullCalendar.Calendar(calendarDiv, {
             locale: 'fr',
             initialView: 'dayGridMonth',
-            events: '/events'
+            events: '/events',
+            editable: true,
+            eventClick: handleClick,
+            eventDrop: handleDrop
         });
         calendar.render();
+
+        function handleClick(info) {
+            const eventId = info.event.id;
+            const title = info.event.title;
+            const start = info.event.start;
+            const startDate = start.toISOString().split('T')[0];
+            const eventUserId = userInput.value;
+            const enterpriseId = info.event.extendedProps.entrepriseId;
+
+            titleInput.value = title;
+            startInput.value = startDate;
+            startTimeInput.value = `${start.getHours().toString().padStart(2, '0')}T${start.getMinutes().toString().padStart(2, '0')}`;
+            finishInput.checked = info.event.extendedProps.finish;
+            modForm.setAttribute("action", "/edit/event/" + eventId);
+            document.querySelector(`[data-userId='${info.event.extendedProps.userId}']`).setAttribute("selected", true);
+            deleteBtn.setAttribute("href", "/delete/event/" + eventId);
+
+            toggleModale();
+        }
+
+        async function handleDrop(info) {
+            const eventId = info.event.id;
+
+            const startDateTime = info.event.start;
+            const start = startDateTime.toISOString().split('T')[0];
+            const startTime = startDateTime.toISOString().split('T')[1].slice(0, 5);
+
+
+            const eventData = { start: start, startTime: startTime };
+
+            // Envoi de la requête
+            await fetch(`/edit/event/${eventId}`, {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(eventData)
+            });
+        }
+
+        function toggleModale() {
+            mod.classList.toggle("active");
+        }
     </script>
 </main>
 {% endblock %}

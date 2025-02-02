@@ -1,0 +1,10 @@
+main {
+    padding: 5em;
+}
+
+#calendar {
+    max-height: 800px;
+    background-color: white;
+    padding: 1em;
+    border-radius: var(--box-radius);
+}

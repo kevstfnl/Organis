@@ -2,13 +2,13 @@ model Event {
     id          Int      @id @default(autoincrement())
     title       String
     start   DateTime
-    end     DateTime
 
+    finish Boolean @default(false)
     entrepriseId Int
     entreprise   Enterprise @relation(fields: [entrepriseId], references: [id])
 
     userId Int
-    user   User @relation(fields: [userId], references: [id])
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

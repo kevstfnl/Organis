@@ -1,6 +1,5 @@
-const { addMember, displayEditMember, editMember } = require('../controllers/enterpriseController');
+const { addMember, displayEditMember, editMember, removeMember } = require('../controllers/enterpriseController');
 const { authguard } = require('../middlewares/authguard');
-const { uncryptIds } = require('../middlewares/idSharing');
 
 const router = require('express').Router();
 
@@ -17,6 +16,6 @@ router.post("/add/user", authguard, addMember);
 
 router.get("/edit/member/:id", authguard, displayEditMember);
 router.post("/edit/member/:id", authguard, editMember);
-//router.get("/remove/:id",authguard, uncryptIds , )
+router.get("/remove/member/:id", authguard, removeMember);
 
 module.exports = router;

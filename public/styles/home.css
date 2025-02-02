@@ -78,8 +78,8 @@ main {
 
 .home-container {
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 1em;
 
     article {
@@ -87,8 +87,7 @@ main {
         flex-direction: column;
         justify-content: space-between;
         padding: 1em;
-        width: 200px;
-        height: 300px;
+        width: 400px;
         background-color: var(--light-2);
         box-shadow: black 0 0 16px;
         border-radius: var(--box-radius);

@@ -16,7 +16,6 @@
 <main>
     <section>
         <h1>Nouvelle tache:</h1>
-        <p>{{userId}}</p>
         <form action="/add/event/{{userId}}" method="post">
             <div class="input-container">
                 <input type="text" name="title" id="title" placeholder="">
@@ -31,18 +30,6 @@
                 <div class="input-container">
                     <input type="time" name="startTime" id="startTime" placeholder="">
                     <label for="startTime">Heure:</label>
-                </div>
-            </div>
-
-            <div class="task-date">
-                <h2>Fin:</h2>
-                <div class="input-container">
-                    <input type="date" name="end" id="end" placeholder="">
-                    <label for="end">Date:</label>
-                </div>
-                <div class="input-container">
-                    <input type="time" name="endTime" id="endTime" placeholder="">
-                    <label for="endTime">Heure:</label>
                 </div>
             </div>
 

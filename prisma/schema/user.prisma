@@ -27,3 +27,5 @@ enum Role {
     RESPONSABLE
     EMPLOYEE
 }
+
+SELECT M.description, U.FIRSTNAME U.LASTNAME FROM material as M inner join user as U ON u.id = m.userId

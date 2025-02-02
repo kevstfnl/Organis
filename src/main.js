@@ -12,6 +12,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.static("./public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_KEY));
 app.use(session({
     secret: process.env.SESSION_KEY,

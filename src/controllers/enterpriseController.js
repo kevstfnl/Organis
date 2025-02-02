@@ -56,6 +56,27 @@ async function addMember(req, res) {
 }
 
 /**
+ * Remove member
+ * @param {Request} req - Request HTTP
+ * @param {Response} res - Response HTTP
+ **/
+async function removeMember(req, res) {
+    if (req.user.role != Role.ADMIN) res.redirect("/");
+
+    try {
+        await prisma.user.delete({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        });
+    } catch (err) {
+        console.error(err);
+
+    }
+    res.redirect("/");
+}
+
+/**
  * @param {Request} req - Request HTTP
  * @param {Response} res - Response HTTP
  **/
@@ -68,7 +89,7 @@ async function displayEditMember(req, res) {
         });
         if (!editUser) throw "Utilisateur inconnu";
 
-        res.render("pages/dashboard/editmember.html.twig", { user: req.user, edit: editUser });
+        res.render("pages/dashboard/editmember.html.twig", { user: req.user, edit: editUser, canSuppress: editUser.role != Role.ADMIN });
     } catch (err) {
         console.error(err)
         res.redirect("/");
@@ -101,9 +122,9 @@ async function editMember(req, res) {
         })
 
     } catch (err) {
-
+        console.error(err);
     }
     res.redirect("/");
 }
 
-module.exports = { addMember, displayEditMember, editMember }
+module.exports = { addMember, displayEditMember, editMember, removeMember }
